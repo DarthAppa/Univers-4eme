@@ -673,3 +673,57 @@ td:first-child { font-weight: 700; }
   .barre, .instrument, .quiz-pied, .suite, .bouton-projection { display: none !important; }
   body { background: #fff; color: #000; }
 }
+
+/* Partie 6 : poussières d'étoiles */
+.observatoire.comparateur .ecran canvas { aspect-ratio: 1 / 1; max-height: 34rem; margin-inline: auto; }
+.comp-liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.25rem; }
+.comp-liste button { width: 100%; display: grid; grid-template-columns: 0.8rem minmax(0, 1fr) auto; align-items: center; gap: 0.55rem; padding: 0.35rem 0.5rem; border-radius: 4px; border: 1px solid transparent; background: transparent; color: #ECE9F7; font: inherit; font-size: 0.9rem; text-align: left; cursor: pointer; min-height: 36px; }
+.comp-liste button:hover { border-color: #323C78; }
+.comp-liste button[aria-pressed="true"] { border-color: #FF5D72; background: rgba(255, 93, 114, 0.12); }
+.comp-liste button:focus-visible { outline: 3px solid #45D3C6; outline-offset: 1px; }
+.comp-liste i { width: 0.8rem; height: 0.8rem; border-radius: 3px; }
+.comp-liste b { font-variant-numeric: tabular-nums; }
+.comp-note { font-size: 0.8rem; color: #9895BC; margin-top: 0.3rem; }
+.comp-legende { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; margin: 0; font-size: 0.85rem; color: #C9C6E4; }
+.comp-legende i, .familles .famille h3::before { display: inline-block; width: 0.75rem; height: 0.75rem; border-radius: 50%; margin-right: 0.4rem; vertical-align: -0.05rem; }
+.o-bb { background: #5AA8FF; } .o-et { background: #FFB347; } .o-ex { background: #C77DFF; }
+.famille.origine-bb h3::before { content: ""; background: #5AA8FF; }
+.famille.origine-et h3::before { content: ""; background: #FFB347; }
+.famille.origine-ex h3::before { content: ""; background: #C77DFF; }
+.forge-ecran { overflow: hidden; }
+.observatoire.forge .ecran canvas { aspect-ratio: 16 / 10; }
+.forge-traits { position: absolute; inset: 0; width: 100%; height: 100% !important; pointer-events: none; aspect-ratio: auto !important; }
+.forge-etiquettes { position: absolute; inset: 0; pointer-events: none; }
+.forge-etiq { position: absolute; left: 0; top: 0; white-space: nowrap; font-size: 0.92rem; color: #ECE9F7; padding: 0.15rem 0.5rem; border-radius: 4px; background: rgba(7, 10, 30, 0.7); opacity: 0; }
+.forge-etiq b { font-family: var(--f-titre); font-size: 1.15rem; margin-right: 0.15rem; }
+.forge-lourds b { color: #C77DFF; }
+.sous-titre { font-size: 1.5rem; margin-bottom: 0.4rem; }
+.cles { display: grid; grid-template-columns: repeat(auto-fill, minmax(5.4rem, 1fr)); gap: 0.6rem; margin-top: 1rem; }
+.el-cle { border: 2px solid var(--c); border-radius: var(--rayon); background: var(--nuit-2); color: var(--texte); padding: 0.55rem 0.3rem; font: inherit; cursor: pointer; text-align: center; min-height: 44px; }
+.el-cle strong { display: block; font-family: var(--f-titre); font-size: 2rem; line-height: 1; }
+.el-cle small { font-size: 0.78rem; color: var(--texte-doux); }
+.el-cle:hover { background: var(--nuit-3); }
+.el-cle[aria-pressed="true"] { background: color-mix(in srgb, var(--c) 24%, var(--nuit-2)); }
+.el-cle:focus-visible { outline: 3px solid var(--oiii); outline-offset: 2px; }
+.fiche-el { margin-top: 1rem; padding: 0.9rem 1rem; border-radius: var(--rayon); background: var(--nuit-2); border: 1px solid var(--ligne); min-height: 5.5rem; }
+.fiche-el p + p { margin-top: 0.4rem; }
+.fiche-sym { font-family: var(--f-titre); font-size: 1.6rem; }
+.tel { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 1.4rem; align-items: center; margin: 1.4rem 0; }
+.tel svg { width: 9rem; height: auto; }
+.tel ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.7rem; min-width: 0; }
+.tel li { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr); gap: 0.5rem; align-items: baseline; }
+.tel li b { font-family: var(--f-titre); font-size: 1.5rem; color: var(--halpha); }
+.ex-origines { display: grid; gap: 0.6rem; margin-top: 1rem; }
+.ex-ligne { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1rem; padding: 0.55rem 0.8rem; border-radius: var(--rayon); background: var(--nuit-2); border: 1px solid var(--ligne); }
+.ex-ligne label b { font-family: var(--f-titre); font-size: 1.3rem; color: var(--halpha); margin-right: 0.3rem; }
+.ex-ligne label small { color: var(--texte-doux); }
+.ex-ligne .champ { width: auto; min-width: 12rem; }
+.ex-ligne.juste { border-color: var(--succes); }
+.ex-ligne.faux { border-color: var(--erreur); }
+@media (max-width: 560px) {
+  .tel { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+  .observatoire.forge .ecran canvas:first-child { aspect-ratio: 4 / 4.6; }
+  .forge-etiq { font-size: 0.78rem; }
+  .forge-etiq b { font-size: 0.95rem; }
+  .ex-ligne .champ { min-width: 0; width: 100%; }
+}

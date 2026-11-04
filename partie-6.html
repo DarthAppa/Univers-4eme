@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Poussières d'étoiles</title>
+  <meta name="description" content="Partie 6 : les éléments chimiques sur Terre et dans l'Univers, et leur origine dans le Big Bang et les étoiles.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%230F1433%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%276%27 fill=%27none%27 stroke=%27%23FF5D72%27 stroke-width=%273%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%271.8%27 fill=%27%23FF5D72%27/%3E%3C/svg%3E">
+  <meta property="og:title" content="Poussières d'étoiles">
+  <meta property="og:description" content="Partie 6 : les éléments chimiques sur Terre et dans l'Univers, et leur origine dans le Big Bang et les étoiles.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Big+Shoulders+Display:wght@700;800&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css?v=6">
+  <script src="assets/js/site.js?v=6" defer></script>
+  <script src="assets/vendor/three.min.js" defer></script>
+  <script src="assets/js/poussieres.js?v=1" defer></script>
+</head>
+<body data-partie="6">
+  <header id="barre" class="barre enveloppe"></header>
+
+  <main>
+    <section class="partie-tete enveloppe">
+      <div class="large">
+        <p class="surtitre">Partie 6 sur 9</p>
+        <h1>Poussières d'étoiles</h1>
+        <p class="chapeau colonne" style="margin-inline:0">Tout ce qui t'entoure est fait d'atomes : l'air, l'eau, les roches, ton téléphone, et toi. Mais d'où viennent ces atomes ? La réponse se trouve dans le Big Bang et au cœur des étoiles.</p>
+      </div>
+    </section>
+
+    <section class="enveloppe" aria-labelledby="titre-prediction">
+      <div class="large">
+        <div class="prediction colonne" style="margin-inline:0">
+          <p class="etiquette" id="titre-prediction">Avant de commencer, fais une prédiction</p>
+          <p>Quel est l'élément chimique <strong>le plus abondant dans l'Univers</strong> ?</p>
+          <div class="etapes clair" id="prediction-choix" aria-label="Choisis un élément">
+            <button type="button" data-el="O">L'oxygène</button>
+            <button type="button" data-el="H">L'hydrogène</button>
+            <button type="button" data-el="Fe">Le fer</button>
+            <button type="button" data-el="C">Le carbone</button>
+          </div>
+          <div class="prediction-reponse" id="prediction-reponse" hidden aria-live="polite">
+            <p><strong class="debut"></strong> C'est l'<strong>hydrogène</strong> : environ les trois quarts de la masse de l'Univers. Avec l'hélium, il représente 98 % de toute la matière ordinaire. Tous les autres éléments réunis ne font que 2 % !</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="instrument enveloppe" aria-labelledby="titre-comparateur">
+      <div class="large">
+        <h2 id="titre-comparateur" style="margin-block:1.6rem 1rem">Le comparateur de matière</h2>
+        <p class="texte-doux colonne" style="margin:0 0 1.2rem">Chaque grille compte 100 carrés : un carré correspond à 1 % de la masse. Compare l'Univers, la Terre, le sol sous tes pieds et ton propre corps. Clique sur un carré ou sur un élément de la liste pour voir sa fiche.</p>
+        <div class="observatoire comparateur">
+          <div class="ecran">
+            <canvas id="comp-grille" role="img" aria-label="Grille de 100 carrés : composition de l'Univers."></canvas>
+          </div>
+          <div class="panneau" aria-live="polite">
+            <p class="panneau-niveau" id="comp-titre">L'Univers</p>
+            <h3 id="comp-nom">Hydrogène</h3>
+            <p id="comp-texte"></p>
+            <dl class="mesures">
+              <div><dt>Part de la masse</dt><dd id="comp-part"></dd></div>
+              <div><dt>Où est-il né ?</dt><dd id="comp-origine"></dd></div>
+            </dl>
+            <ul class="comp-liste" id="comp-liste" aria-label="Éléments de cette grille"></ul>
+          </div>
+          <div class="commandes">
+            <div class="etapes actions" id="comp-onglets" aria-label="Choisir ce que l'on compare">
+              <button type="button" data-g="univers" aria-current="true">L'Univers</button>
+              <button type="button" data-g="terre" aria-current="false">La Terre entière</button>
+              <button type="button" data-g="croute" aria-current="false">La croûte terrestre</button>
+              <button type="button" data-g="corps" aria-current="false">Le corps humain</button>
+            </div>
+            <div class="reglages">
+              <button type="button" class="pause" id="comp-couleurs" aria-pressed="false">Colorer selon l'origine</button>
+              <p class="comp-legende" id="comp-legende" hidden><span><i class="o-bb"></i>Big Bang</span><span><i class="o-et"></i>Cœur des étoiles</span><span><i class="o-ex"></i>Explosions d'étoiles</span></p>
+            </div>
+          </div>
+        </div>
+        <p class="astuce colonne" style="margin-inline:0">L'Univers est presque entièrement fait d'<strong>hydrogène</strong> et d'<strong>hélium</strong>. La Terre, elle, est surtout faite de <strong>fer</strong>, d'<strong>oxygène</strong>, de <strong>silicium</strong> et de <strong>magnésium</strong> : les éléments légers comme l'hydrogène et l'hélium se sont échappés lors de sa formation.</p>
+      </div>
+    </section>
+
+    <section class="instrument enveloppe" aria-labelledby="titre-forge">
+      <div class="large">
+        <h2 id="titre-forge" style="margin-block:1.6rem 1rem">La forge des étoiles</h2>
+        <p class="texte-doux colonne" style="margin:0 0 1.2rem">Une étoile est une immense boule de gaz où les noyaux d'atomes fusionnent pour en fabriquer de nouveaux. Voici une étoile massive, ouverte en coupe : regarde ses couches se former comme un oignon, puis son explosion.</p>
+        <div class="observatoire forge">
+          <div class="ecran forge-ecran">
+            <canvas id="forge3d" role="img" aria-label="Étoile massive en coupe."></canvas>
+            <canvas class="forge-traits" id="forge-traits" aria-hidden="true"></canvas>
+            <div class="forge-etiquettes" id="forge-etiquettes" aria-hidden="true"></div>
+            <p class="scene-erreur" id="forge-erreur" hidden>Ton navigateur ne peut pas afficher la 3D. Lis les étapes dans le panneau à côté.</p>
+          </div>
+          <div class="panneau" aria-live="polite">
+            <p class="panneau-niveau" id="forge-num">Étape 1 sur 6</p>
+            <h3 id="forge-nom">Une étoile s'allume</h3>
+            <p id="forge-texte"></p>
+            <dl class="mesures">
+              <div><dt>Ce qui fusionne</dt><dd id="forge-entree"></dd></div>
+              <div><dt>Ce qui est fabriqué</dt><dd id="forge-sortie"></dd></div>
+            </dl>
+          </div>
+          <div class="commandes">
+            <div class="curseur-ligne">
+              <label for="forge-temps">Vie de l'étoile</label>
+              <input type="range" id="forge-temps" min="0" max="17" step="0.05" value="0">
+            </div>
+            <div class="etapes actions">
+              <button type="button" class="lecture" id="forge-lecture" aria-pressed="true">Pause</button>
+              <button type="button" class="lecture" id="forge-rejouer">Rejouer depuis le début</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-origines">
+      <div class="colonne">
+        <h2 id="titre-origines">D'où viennent les éléments ?</h2>
+        <p>Les éléments chimiques ne sont pas tous nés au même endroit. Il y a trois grandes « usines » dans l'Univers.</p>
+      </div>
+      <div class="large" style="margin-top:1.2rem">
+        <div class="familles">
+          <div class="famille origine-bb"><h3>Le Big Bang</h3><p class="famille-noms">Hydrogène, hélium</p><ul><li>Dans les premières minutes de l'Univers, il y a 13,8 milliards d'années.</li><li>Ce sont les éléments les plus légers et les plus abondants.</li></ul></div>
+          <div class="famille origine-et"><h3>Le cœur des étoiles</h3><p class="famille-noms">Carbone, azote, oxygène, silicium… jusqu'au fer</p><ul><li>Par fusion des noyaux, dans des cœurs à des millions de degrés.</li><li>Les étoiles qui meurent les rejettent dans l'espace.</li></ul></div>
+          <div class="famille origine-ex"><h3>Les explosions d'étoiles</h3><p class="famille-noms">Or, uranium, néodyme…</p><ul><li>Lors des supernovae et des collisions d'étoiles à neutrons.</li><li>Ce sont les éléments plus lourds que le fer, et les plus rares.</li></ul></div>
+        </div>
+      </div>
+      <div class="colonne" style="margin-top:1.8rem">
+        <h3 class="sous-titre">Douze éléments à connaître</h3>
+        <p class="texte-doux">Clique sur un élément. Sa couleur indique où il est né.</p>
+        <div class="cles" id="cles"></div>
+        <div class="fiche-el" id="fiche-el" aria-live="polite"><p class="texte-doux">Choisis un élément pour voir sa fiche.</p></div>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-corps">
+      <div class="colonne">
+        <h2 id="titre-corps">Tu es fait de poussières d'étoiles</h2>
+        <p>Ton corps contient surtout de l'<strong>oxygène</strong>, du <strong>carbone</strong>, de l'<strong>hydrogène</strong> et de l'<strong>azote</strong>. L'hydrogène de ton corps vient du Big Bang : il a 13,8 milliards d'années. Presque tout le reste a été fabriqué dans des étoiles qui ont vécu et explosé bien avant la naissance du Soleil.</p>
+        <div class="formules">
+          <p><strong>≈ 90 %</strong><span>de la masse de ton corps a été fabriquée dans des étoiles</span></p>
+          <p><strong>Fe</strong><span>le fer de ton sang vient d'étoiles massives et de leurs explosions</span></p>
+          <p><strong>Ca</strong><span>le calcium de tes os a été forgé au cœur d'étoiles</span></p>
+        </div>
+        <p class="astuce">L'astronome Carl Sagan l'a résumé ainsi : nous sommes faits de « matière d'étoiles ». Les atomes de ton corps ont voyagé dans l'espace pendant des milliards d'années avant de former la Terre, puis toi.</p>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-tel">
+      <div class="colonne">
+        <h2 id="titre-tel">Des éléments rares dans ta poche</h2>
+        <p>Un smartphone contient plus de 40 éléments chimiques différents. Certains sont <strong>rares sur Terre</strong> : il y en a peu, ils sont dispersés dans les roches et difficiles à extraire.</p>
+        <div class="tel">
+          <svg viewBox="0 0 150 290" role="img" aria-label="Smartphone et les éléments qu'il contient">
+            <rect x="8" y="4" width="134" height="282" rx="20" fill="#070A1E" stroke="#ABA8CC" stroke-width="3"/>
+            <rect x="18" y="26" width="114" height="200" rx="6" fill="#1D2A6B"/>
+            <circle cx="75" cy="15" r="3.5" fill="#ABA8CC"/>
+            <rect x="34" y="236" width="82" height="36" rx="6" fill="#2C3570"/>
+            <text x="75" y="80" fill="#FFD27A" font-size="13" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif">écran : In</text>
+            <text x="75" y="130" fill="#9FE0EA" font-size="13" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif">circuits : Au</text>
+            <text x="75" y="180" fill="#FFB3C0" font-size="13" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif">vibreur : Nd</text>
+            <text x="75" y="259" fill="#C9F7B0" font-size="12" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif">batterie : Li, Co</text>
+          </svg>
+          <ul>
+            <li><b>Li</b><span><strong>Lithium</strong> : la batterie. On l'extrait surtout en Australie, au Chili et en Argentine.</span></li>
+            <li><b>Co</b><span><strong>Cobalt</strong> : la batterie. Il vient surtout de République démocratique du Congo, où son extraction pose des problèmes humains et environnementaux.</span></li>
+            <li><b>Nd</b><span><strong>Néodyme</strong>, une terre rare : les aimants du vibreur et du haut-parleur.</span></li>
+            <li><b>In</b><span><strong>Indium</strong> : il rend l'écran tactile. Il est très peu abondant sur Terre.</span></li>
+            <li><b>Au</b><span><strong>Or</strong> : les circuits électroniques. Il est né lors de collisions d'étoiles !</span></li>
+          </ul>
+        </div>
+        <p>Les <strong>terres rares</strong> sont un groupe de 17 métaux, comme le néodyme. Elles ne sont pas toutes si rares, mais elles sont dispersées dans les roches : il faut extraire et traiter d'énormes quantités de minerai pour en obtenir un peu, ce qui pollue. La quantité de ces éléments sur Terre est <strong>limitée</strong> : on ne peut pas en fabriquer d'autres. C'est pourquoi il est important de <strong>réparer et recycler</strong> ses appareils.</p>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-exercice">
+      <div class="colonne">
+        <h2 id="titre-exercice">À toi de jouer</h2>
+        <p>Voici des éléments présents dans un smartphone. Pour chacun, retrouve où il est né.</p>
+        <div class="ex-origines" id="ex-origines"></div>
+        <div class="prediction-saisie" style="margin-top:1rem">
+          <button type="button" class="bouton" id="ex-verifier">Vérifier</button>
+          <button type="button" class="bouton discret" id="ex-indice">Un indice</button>
+        </div>
+        <p id="ex-aide" class="astuce" hidden>Le Big Bang n'a fabriqué que les éléments les plus légers. Les étoiles fabriquent les éléments jusqu'au fer. Les éléments plus lourds que le fer naissent dans les explosions et les collisions d'étoiles.</p>
+        <p id="ex-retour" class="ex-retour" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-retenir">
+      <div class="colonne">
+        <h2 id="titre-retenir">Ce qu'il faut retenir</h2>
+        <p>Toute la matière est faite d'<strong>atomes</strong>. Il existe une centaine d'<strong>éléments chimiques</strong> différents, chacun noté par un <strong>symbole</strong> : H pour l'hydrogène, O pour l'oxygène, Fe pour le fer…</p>
+        <p>L'<strong>hydrogène</strong> et l'<strong>hélium</strong> sont nés au <strong>Big Bang</strong>. Ce sont les éléments les plus abondants de l'Univers.</p>
+        <p>Les autres éléments ont été fabriqués dans les <strong>étoiles</strong> (jusqu'au fer), puis dans les <strong>explosions et collisions d'étoiles</strong> (au-delà du fer). Nous sommes faits de <strong>poussières d'étoiles</strong>.</p>
+        <p>Les mêmes éléments se retrouvent <strong>partout dans l'Univers</strong> : en analysant la lumière des étoiles, les astronomes y trouvent les mêmes atomes que sur Terre. La matière et ses lois sont les mêmes partout.</p>
+        <p>Sur Terre, certains éléments sont <strong>rares</strong> et en quantité <strong>limitée</strong>, comme les terres rares. Il faut les économiser et les recycler.</p>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-vocabulaire">
+      <div class="colonne">
+        <h2 id="titre-vocabulaire">Le vocabulaire</h2>
+        <dl class="vocabulaire">
+          <div><dt>Atome</dt><dd>Minuscule grain de matière. Tout ce qui nous entoure est fait d'atomes.</dd></div>
+          <div><dt>Élément chimique</dt><dd>Famille d'atomes identiques. L'oxygène, le carbone et le fer sont des éléments chimiques.</dd></div>
+          <div><dt>Symbole chimique</dt><dd>Une ou deux lettres qui désignent un élément : C pour le carbone, Fe pour le fer. La première lettre est toujours une majuscule.</dd></div>
+          <div><dt>Fusion nucléaire</dt><dd>Réaction au cœur des étoiles : des noyaux d'atomes s'assemblent pour en former de plus gros, en libérant beaucoup d'énergie.</dd></div>
+          <div><dt>Supernova</dt><dd>Explosion gigantesque d'une étoile massive en fin de vie. Elle disperse ses éléments dans l'espace.</dd></div>
+          <div><dt>Terres rares</dt><dd>Groupe de 17 métaux, comme le néodyme, utilisés dans l'électronique et difficiles à extraire.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-quiz">
+      <div class="colonne">
+        <h2 id="titre-quiz">Mini-quiz</h2>
+        <p class="texte-doux" style="margin-bottom:1.4rem">Cinq questions pour vérifier que tu as bien compris.</p>
+        <div id="quiz"></div>
+      </div>
+    </section>
+
+    <nav class="suite enveloppe" aria-label="Navigation entre les parties">
+      <div class="large" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;width:100%">
+        <a class="bouton discret" href="partie-5.html">Partie 5 : L'histoire de l'Univers</a>
+        <span class="bientot">Partie 7 : La naissance du système solaire, en préparation</span>
+      </div>
+    </nav>
+  </main>
+
+  <footer class="pied enveloppe">
+    <div class="large">Physique-chimie, cycle 4, niveau 4e. Pourcentages arrondis, en masse. L'origine des éléments est simplifiée : certains éléments, comme le fer ou le lithium, ont plusieurs origines.</div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      window.Univers.quiz("quiz", [
+        {
+          q: "Quel est l'élément le plus abondant dans l'Univers ?",
+          choix: ["L'oxygène", "Le fer", "L'hydrogène", "Le carbone"],
+          bonne: 2,
+          explication: "L'hydrogène représente environ les trois quarts de la masse de l'Univers. Il est né au Big Bang."
+        },
+        {
+          q: "Où ont été fabriqués la plupart des atomes de carbone et d'oxygène ?",
+          choix: ["Au Big Bang", "Au cœur des étoiles", "Dans le noyau de la Terre", "Dans les volcans"],
+          bonne: 1,
+          explication: "Le carbone et l'oxygène sont fabriqués par fusion nucléaire au cœur des étoiles, puis rejetés dans l'espace."
+        },
+        {
+          q: "L'or est un élément plus lourd que le fer. Où est-il né ?",
+          choix: ["Dans les mines", "Au Big Bang", "Au cœur du Soleil", "Lors d'explosions et de collisions d'étoiles"],
+          bonne: 3,
+          explication: "Les étoiles ne fabriquent pas d'éléments plus lourds que le fer en temps normal. L'or naît lors de collisions d'étoiles à neutrons et d'explosions d'étoiles."
+        },
+        {
+          q: "Quel est l'élément le plus abondant dans la croûte terrestre ?",
+          choix: ["L'oxygène", "L'hydrogène", "Le fer", "L'or"],
+          bonne: 0,
+          explication: "L'oxygène représente près de la moitié de la masse de la croûte terrestre : il est présent dans presque toutes les roches, avec le silicium."
+        },
+        {
+          q: "Pourquoi faut-il recycler les smartphones ?",
+          choix: ["Parce qu'ils sont trop lourds", "Parce qu'ils contiennent des éléments rares en quantité limitée sur Terre", "Parce que l'or se fabrique facilement", "Parce qu'ils contiennent de l'hydrogène"],
+          bonne: 1,
+          explication: "Le lithium, le cobalt, l'indium ou les terres rares sont en quantité limitée et difficiles à extraire. Les recycler évite d'en extraire davantage."
+        }
+      ]);
+    });
+  </script>
+</body>
+</html>
