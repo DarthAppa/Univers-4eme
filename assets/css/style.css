@@ -727,3 +727,45 @@ td:first-child { font-weight: 700; }
   .forge-etiq b { font-size: 0.95rem; }
   .ex-ligne .champ { min-width: 0; width: 100%; }
 }
+
+/* Partie 7 : la naissance du système solaire */
+.observatoire.naissance .ecran canvas { aspect-ratio: 16 / 10; }
+.naissance-ecran { overflow: hidden; }
+.observatoire.geo { grid-template-columns: minmax(0, 1fr) 21rem; }
+.geo-zone { padding: 1rem 1rem 1.2rem; display: grid; gap: 1rem; align-content: start; min-width: 0; }
+.geo-vues button { min-height: 40px; }
+.geo-boite { overflow-x: auto; padding-bottom: 0.2rem; }
+.geo-frise { position: relative; min-width: 560px; margin-inline: 0.4rem; }
+.geo-evts { position: relative; }
+.geo-evt { position: absolute; bottom: calc(var(--rang, 0) * 30px + 6px); transform: translateX(-50%); border: 0; background: transparent; padding: 0; cursor: pointer; font: inherit; }
+.geo-evt.gauche { transform: none; }
+.geo-evt.droite { transform: translateX(-100%); }
+.geo-evt span { display: block; white-space: nowrap; font-size: 0.75rem; font-weight: 700; color: #ECE9F7; padding: 0.15rem 0.45rem; border-radius: 4px; background: #111743; border: 1px solid #323C78; }
+.geo-evt::after { content: ""; position: absolute; left: 50%; top: 100%; width: 1px; height: calc(var(--rang, 0) * 30px + 6px); background: rgba(236, 233, 247, 0.45); }
+.geo-evt.gauche::after { left: 0; }
+.geo-evt.droite::after { left: 100%; }
+.geo-evt:hover span, .geo-evt[aria-pressed="true"] span { border-color: #FF5D72; background: #3A1830; }
+.geo-evt:focus-visible span { outline: 3px solid #45D3C6; outline-offset: 1px; }
+.geo-renvoi span { border-style: dashed; border-color: #F5C451; color: #F5C451; }
+.geo-rang { position: relative; height: 44px; margin-top: 3px; }
+.geo-bande { position: absolute; top: 0; bottom: 0; border: 0; border-right: 1px solid rgba(7, 10, 30, 0.5); padding: 0 0.3rem; font: inherit; font-size: 0.82rem; font-weight: 700; cursor: pointer; overflow: hidden; white-space: nowrap; text-align: center; }
+.geo-bande:hover { filter: brightness(1.12); }
+.geo-bande[aria-pressed="true"] { box-shadow: inset 0 0 0 3px #FFFFFF; z-index: 1; }
+.geo-bande:focus-visible { outline: 3px solid #45D3C6; outline-offset: -3px; z-index: 2; }
+.geo-grads { position: relative; height: 1.4rem; margin-top: 0.3rem; }
+.geo-grads span { position: absolute; transform: translateX(-50%); font-size: 0.72rem; color: #9895BC; white-space: nowrap; }
+.geo-grads span.debut { transform: none; }
+.geo-grads span.fin { transform: translateX(-100%); }
+.horloge-cadran { display: grid; place-items: center; padding: 1rem; min-width: 0; }
+.horloge-cadran svg { width: 100%; max-width: 24rem; height: auto; }
+.tableau-horloge { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+.tableau-horloge caption { text-align: left; margin-bottom: 0.5rem; }
+.tableau-horloge th { text-align: left; color: var(--texte-doux); font-weight: 700; padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--ligne); }
+.tableau-horloge td { padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--ligne); font-variant-numeric: tabular-nums; }
+.tableau-horloge td:last-child { white-space: nowrap; font-weight: 700; }
+@media (max-width: 900px) { .observatoire.geo { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 560px) { .observatoire.naissance .ecran canvas { aspect-ratio: 4 / 4.4; } }
+.forge-etiq.petite { font-size: 0.74rem; padding: 0.05rem 0.35rem; }
+.geo-zone { grid-template-columns: minmax(0, 1fr); }
+.geo-boite { min-width: 0; }
+.tableau-boite { overflow-x: auto; min-width: 0; }

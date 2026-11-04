@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>La naissance du système solaire</title>
+  <meta name="description" content="Partie 7 : comment le Soleil et les planètes se sont formés il y a 4,6 milliards d'années, et les grands âges de l'histoire de la Terre.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%230F1433%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%276%27 fill=%27none%27 stroke=%27%23FF5D72%27 stroke-width=%273%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%271.8%27 fill=%27%23FF5D72%27/%3E%3C/svg%3E">
+  <meta property="og:title" content="La naissance du système solaire">
+  <meta property="og:description" content="Partie 7 : comment le Soleil et les planètes se sont formés il y a 4,6 milliards d'années, et les grands âges de l'histoire de la Terre.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Big+Shoulders+Display:wght@700;800&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css?v=7">
+  <script src="assets/js/site.js?v=7" defer></script>
+  <script src="assets/vendor/three.min.js" defer></script>
+  <script src="assets/js/naissance.js?v=1" defer></script>
+</head>
+<body data-partie="7">
+  <header id="barre" class="barre enveloppe"></header>
+
+  <main>
+    <section class="partie-tete enveloppe">
+      <div class="large">
+        <p class="surtitre">Partie 7 sur 9</p>
+        <h1>La naissance du système solaire</h1>
+        <p class="chapeau colonne" style="margin-inline:0">Il y a 4,6 milliards d'années, un nuage de gaz et de poussières s'est effondré. Il a donné naissance au Soleil, puis aux planètes. Comment ? Et que s'est-il passé sur la Terre depuis ?</p>
+      </div>
+    </section>
+
+    <section class="enveloppe" aria-labelledby="titre-prediction">
+      <div class="large">
+        <div class="prediction colonne" style="margin-inline:0">
+          <p class="etiquette" id="titre-prediction">Avant de commencer, fais une prédiction</p>
+          <p>Imagine que toute l'histoire de la Terre tienne en <strong>une journée de 24 heures</strong> : la Terre se forme à minuit, et aujourd'hui, c'est le minuit suivant. Combien de <strong>secondes avant minuit</strong> apparaissent les premiers humains de notre espèce ?</p>
+          <div class="prediction-saisie">
+            <input id="prediction-champ" type="text" inputmode="decimal" placeholder="en secondes" aria-label="Ta prédiction en secondes">
+            <button type="button" class="bouton discret" id="prediction-valider" data-cible="6">Voir la réponse</button>
+          </div>
+          <div class="prediction-reponse" id="prediction-reponse" hidden aria-live="polite">
+            <p><strong class="debut"></strong> Environ <strong>6 secondes</strong> avant minuit ! Homo sapiens n'existe que depuis 300 000 ans, alors que la Terre a 4,54 milliards d'années. Tu retrouveras cette journée sur l'horloge de la Terre, plus bas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="instrument enveloppe" aria-labelledby="titre-simulateur">
+      <div class="large">
+        <h2 id="titre-simulateur" style="margin-block:1.6rem 1rem">De la nébuleuse aux planètes</h2>
+        <p class="texte-doux colonne" style="margin:0 0 1.2rem">Assiste à la formation du système solaire. Déplace le curseur pour avancer ou reculer dans le temps : environ 100 millions d'années sont résumées ici en quelques secondes.</p>
+        <div class="observatoire naissance">
+          <div class="ecran naissance-ecran">
+            <canvas id="naissance3d" role="img" aria-label="Formation du système solaire."></canvas>
+            <div class="forge-etiquettes" id="naissance-etiquettes" aria-hidden="true"></div>
+            <p class="scene-erreur" id="naissance-erreur" hidden>Ton navigateur ne peut pas afficher la 3D. Lis les étapes dans le panneau à côté.</p>
+          </div>
+          <div class="panneau" aria-live="polite">
+            <p class="panneau-niveau" id="nais-num">Étape 1 sur 6</p>
+            <h3 id="nais-nom">Un nuage de gaz et de poussières</h3>
+            <p id="nais-texte"></p>
+            <dl class="mesures">
+              <div><dt>Il y a environ</dt><dd id="nais-date"></dd></div>
+            </dl>
+          </div>
+          <div class="commandes">
+            <div class="curseur-ligne">
+              <label for="nais-temps">Temps</label>
+              <input type="range" id="nais-temps" min="0" max="16" step="0.05" value="0">
+            </div>
+            <div class="etapes actions">
+              <button type="button" class="lecture" id="nais-lecture" aria-pressed="true">Pause</button>
+              <button type="button" class="lecture" id="nais-rejouer">Rejouer depuis le début</button>
+            </div>
+          </div>
+        </div>
+        <p class="astuce colonne" style="margin-inline:0">La <strong>ligne des glaces</strong> explique les deux familles de planètes vues dans la partie 2. Près du Soleil, il fait trop chaud : seules les roches et les métaux restent solides, ce qui donne de petites <strong>planètes rocheuses</strong>. Plus loin, l'eau gèle : les planètes y grossissent beaucoup plus et attirent d'énormes quantités de gaz. Ce sont les <strong>géantes gazeuses</strong>.</p>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-age">
+      <div class="colonne">
+        <h2 id="titre-age">Comment connaît-on l'âge de la Terre ?</h2>
+        <p>Personne n'était là pour le voir ! Mais les roches gardent la mémoire du temps. Certains atomes, dits <strong>radioactifs</strong>, se transforment lentement en d'autres atomes, à une vitesse parfaitement régulière. En mesurant ce qu'il en reste dans une roche, on calcule son âge, comme avec un sablier.</p>
+        <div class="formules">
+          <p><strong>4,57 Ga</strong><span>âge des plus vieilles météorites, restes de la formation du système solaire</span></p>
+          <p><strong>4,54 Ga</strong><span>âge de la Terre</span></p>
+          <p><strong>4,4 Ga</strong><span>âge des plus vieux cristaux trouvés sur Terre, en Australie</span></p>
+        </div>
+        <p class="texte-doux">Ga signifie « milliard d'années » (giga-année). On écrit aussi Ma pour « million d'années ».</p>
+      </div>
+    </section>
+
+    <section class="instrument enveloppe" aria-labelledby="titre-frise-geo">
+      <div class="large">
+        <h2 id="titre-frise-geo" style="margin-block:1.6rem 1rem">La frise des âges de la Terre</h2>
+        <p class="texte-doux colonne" style="margin:0 0 1.2rem">Les géologues découpent l'histoire de la Terre en <strong>éons</strong>, eux-mêmes découpés en <strong>ères</strong>, puis en <strong>périodes</strong>. La frise est à l'échelle. Clique sur un événement pour voir sa fiche, et zoome sur les 541 derniers millions d'années pour voir les périodes.</p>
+        <div class="observatoire geo">
+          <div class="geo-zone">
+            <div class="etapes actions geo-vues" aria-label="Choisir la vue">
+              <button type="button" id="geo-tout" aria-current="true">Toute l'histoire de la Terre</button>
+              <button type="button" id="geo-zoom" aria-current="false">Zoom : les 541 derniers millions d'années</button>
+            </div>
+            <div class="geo-boite">
+              <div class="geo-frise" id="geo-frise"></div>
+            </div>
+          </div>
+          <div class="panneau geo-fiche" aria-live="polite">
+            <p class="panneau-niveau" id="geo-quand">Il y a 4,54 milliards d'années</p>
+            <h3 id="geo-nom">Formation de la Terre</h3>
+            <p id="geo-texte"></p>
+            <dl class="mesures">
+              <div><dt>Éon</dt><dd id="geo-eon"></dd></div>
+              <div><dt>Ère et période</dt><dd id="geo-ere"></dd></div>
+              <div><dt>Sur l'horloge de la Terre</dt><dd id="geo-heure"></dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="instrument enveloppe" aria-labelledby="titre-horloge">
+      <div class="large">
+        <h2 id="titre-horloge" style="margin-block:1.6rem 1rem">L'horloge de la Terre</h2>
+        <p class="texte-doux colonne" style="margin:0 0 1.2rem">Toute l'histoire de la Terre ramenée à une journée de 24 heures. Fais tourner l'aiguille avec le curseur, ou lance la journée. Une heure représente environ 190 millions d'années.</p>
+        <div class="observatoire horloge">
+          <div class="horloge-cadran">
+            <svg id="horloge" viewBox="-160 -160 320 320" role="img" aria-label="Horloge de 24 heures de l'histoire de la Terre"></svg>
+          </div>
+          <div class="panneau" aria-live="polite">
+            <p class="panneau-niveau" id="h-heure">0 h 00</p>
+            <h3 id="h-titre">Formation de la Terre</h3>
+            <p id="h-texte"></p>
+            <dl class="mesures">
+              <div><dt>Ce qui correspond à</dt><dd id="h-ilya"></dd></div>
+              <div><dt>Éon</dt><dd id="h-eon"></dd></div>
+            </dl>
+          </div>
+          <div class="commandes">
+            <div class="curseur-ligne">
+              <label for="h-curseur">Heure</label>
+              <input type="range" id="h-curseur" min="0" max="1440" step="1" value="0">
+            </div>
+            <div class="etapes actions">
+              <button type="button" class="son" id="h-jouer" aria-pressed="false">Lancer la journée</button>
+              <button type="button" class="lecture" id="h-fin">Aller à minuit</button>
+            </div>
+          </div>
+        </div>
+        <div class="tableau-boite colonne" style="margin:1.4rem 0 0">
+          <table class="tableau-horloge">
+            <caption class="texte-doux">Les grands événements sur l'horloge de la Terre</caption>
+            <thead><tr><th scope="col">Événement</th><th scope="col">Il y a</th><th scope="col">Heure</th></tr></thead>
+            <tbody id="h-table"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-retenir">
+      <div class="colonne">
+        <h2 id="titre-retenir">Ce qu'il faut retenir</h2>
+        <p>Le système solaire s'est formé il y a environ <strong>4,6 milliards d'années</strong>, à partir d'un <strong>nuage de gaz et de poussières</strong> qui s'est effondré sous l'effet de la <strong>gravitation</strong>.</p>
+        <p>Le nuage s'est mis à tourner et s'est aplati en <strong>disque</strong>. Au centre, le <strong>Soleil</strong> s'est allumé. Dans le disque, les poussières se sont collées en blocs de plus en plus gros, les <strong>planétésimaux</strong>, qui ont formé les <strong>planètes</strong>.</p>
+        <p>Près du Soleil, il faisait trop chaud pour la glace : il s'est formé des <strong>planètes rocheuses</strong>. Au-delà de la <strong>ligne des glaces</strong>, se sont formées les <strong>géantes gazeuses</strong>.</p>
+        <p>L'histoire de la Terre est découpée en <strong>éons</strong>, <strong>ères</strong> et <strong>périodes</strong>. La vie est apparue il y a environ 3,8 milliards d'années, mais les humains ne sont là que depuis 300 000 ans : quelques secondes sur une journée de 24 heures.</p>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-vocabulaire">
+      <div class="colonne">
+        <h2 id="titre-vocabulaire">Le vocabulaire</h2>
+        <dl class="vocabulaire">
+          <div><dt>Nébuleuse</dt><dd>Immense nuage de gaz et de poussières dans l'espace, où naissent les étoiles.</dd></div>
+          <div><dt>Disque protoplanétaire</dt><dd>Disque de gaz et de poussières qui tourne autour d'une jeune étoile, et où se forment les planètes.</dd></div>
+          <div><dt>Planétésimal</dt><dd>Bloc de roche ou de glace de quelques kilomètres, formé dans le disque. En s'assemblant, les planétésimaux forment les planètes.</dd></div>
+          <div><dt>Accrétion</dt><dd>Rassemblement de matière qui se colle et grossit petit à petit, sous l'effet de la gravitation.</dd></div>
+          <div><dt>Ligne des glaces</dt><dd>Distance au Soleil au-delà de laquelle l'eau gèle. Elle sépare les planètes rocheuses des géantes gazeuses.</dd></div>
+          <div><dt>Éon, ère, période</dt><dd>Les découpages du temps géologique, du plus long au plus court. Par exemple : le Phanérozoïque (éon), le Mésozoïque (ère), le Jurassique (période).</dd></div>
+          <div><dt>Météorite</dt><dd>Morceau de roche venu de l'espace et tombé sur Terre. Certaines datent de la formation du système solaire.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-quiz">
+      <div class="colonne">
+        <h2 id="titre-quiz">Mini-quiz</h2>
+        <p class="texte-doux" style="margin-bottom:1.4rem">Cinq questions pour vérifier que tu as bien compris.</p>
+        <div id="quiz"></div>
+      </div>
+    </section>
+
+    <nav class="suite enveloppe" aria-label="Navigation entre les parties">
+      <div class="large" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;width:100%">
+        <a class="bouton discret" href="partie-6.html">Partie 6 : Poussières d'étoiles</a>
+        <span class="bientot">Partie 8 : La gravitation universelle, en préparation</span>
+      </div>
+    </nav>
+  </main>
+
+  <footer class="pied enveloppe">
+    <div class="large">Physique-chimie, cycle 4, niveau 4e. Dates arrondies, d'après l'échelle des temps géologiques de la Commission internationale de stratigraphie. Dans le simulateur, les distances et les tailles des planètes ne sont pas à l'échelle.</div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      window.Univers.quiz("quiz", [
+        {
+          q: "Il y a combien de temps le système solaire s'est-il formé ?",
+          choix: ["4,6 millions d'années", "4,6 milliards d'années", "13,8 milliards d'années", "300 000 ans"],
+          bonne: 1,
+          explication: "Le Soleil et les planètes se sont formés il y a environ 4,6 milliards d'années. 13,8 milliards d'années, c'est l'âge de l'Univers."
+        },
+        {
+          q: "Pourquoi les planètes proches du Soleil sont-elles rocheuses ?",
+          choix: ["Parce qu'elles sont plus vieilles", "Parce qu'il y faisait trop chaud pour que la glace et le gaz s'accumulent", "Parce que le Soleil les a fabriquées", "Parce qu'elles tournent plus lentement"],
+          bonne: 1,
+          explication: "Près du Soleil, seules les roches et les métaux restaient solides. Au-delà de la ligne des glaces, les planètes ont pu grossir beaucoup et attirer du gaz."
+        },
+        {
+          q: "Comment appelle-t-on les blocs de quelques kilomètres qui s'assemblent pour former les planètes ?",
+          choix: ["Des météores", "Des comètes", "Des planétésimaux", "Des nébuleuses"],
+          bonne: 2,
+          explication: "Les poussières se collent en cailloux, puis en planétésimaux, qui s'assemblent à leur tour pour former les planètes : c'est l'accrétion."
+        },
+        {
+          q: "Pendant quelle ère vivaient les dinosaures ?",
+          choix: ["Le Paléozoïque", "Le Mésozoïque", "Le Cénozoïque", "L'Hadéen"],
+          bonne: 1,
+          explication: "Le Mésozoïque (de -252 à -66 millions d'années) regroupe le Trias, le Jurassique et le Crétacé : c'est l'ère des dinosaures."
+        },
+        {
+          q: "Si l'histoire de la Terre durait 24 heures, quand apparaîtraient les humains ?",
+          choix: ["À midi", "Vers 18 h", "Vers 23 h", "Quelques secondes avant minuit"],
+          bonne: 3,
+          explication: "Homo sapiens existe depuis 300 000 ans : sur l'horloge de la Terre, c'est environ 6 secondes avant minuit."
+        }
+      ]);
+    });
+  </script>
+</body>
+</html>
